@@ -1,0 +1,15 @@
+body {
+  display: block;
+  text-align: center;
+  margin-top: 2%;
+  background: url("../assets/background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,12 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="email">Email: </label>
+    <input type="email" formControlName="email" id="email" autocomplete="username email">
+    <label for="password">Password:</label>
+    <input type="password" formControlName="password" class="form-control" id="password" autocomplete="current-password"/>
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="submitted" class="btn btn-primary">Login</button>
+    <button type="button" [routerLink]="secondButtonUrl" class="btn btn-primary">{{secondButtonName}}</button>
+  </div>
+</form>

@@ -1,0 +1,24 @@
+@import '~src/sass/mixins';
+
+form {
+  width: 60%;
+  margin: auto;
+}
+input, label, button {
+  display: block;
+  margin: auto;
+}
+.form-group {
+  display: block;
+  margin: 15px;
+}
+button {
+  @include button(100, 20);
+
+}
+input {
+  @include input;
+}
+label {
+  @include label;
+}

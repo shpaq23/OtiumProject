@@ -1,0 +1,10 @@
+@mixin button($width, $height: 70px) {
+  background-color: crimson;
+}
+@mixin label {
+
+}
+@mixin input {
+  width: 400px;
+  background-color: red;
+}
