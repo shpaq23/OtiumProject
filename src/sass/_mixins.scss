@@ -1,10 +1,48 @@
-@mixin button($width, $height: 70px) {
-  background-color: crimson;
+@mixin customFont($bold: false, $fontSize: 130%) {
+  font-family: customFont, serif;
+  font-size: $fontSize;
+  @if($bold) {
+    font-weight: bold;
+  }
+}
+@mixin button($width, $height: 20px) {
+  background-color: #7b0000;
+  width: $width;
+  height: $height;
+  border-radius: 10px;
+  border: 2px solid #a90000;
+  outline: none;
+  padding: 10px;
+  @include customFont(true);
+  &:active {
+    transform: translateY(4px);
+  }
+  &:disabled {
+    background-color: #4b0000;
+  }
 }
 @mixin label {
-
+  @include customFont(true, 170%);
+  margin-top: 10px;
 }
 @mixin input {
-  width: 400px;
-  background-color: red;
+  width: 388px;
+  @include customFont();
+  outline: none;
+  border-radius: 10px;
+  padding: 6px;
+  border-color: rgb(112, 111, 112);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  &:disabled {
+    background-color: rgba(111, 111, 111, 0.7);
+    color: white;
+  }
+  &.invalid {
+    background-color: rgba(255, 162, 162, 0.23);
+  }
+}
+@mixin header($fontSize: 100%, $color: black) {
+  @include customFont(true, $fontSize);
+  color: $color;
 }

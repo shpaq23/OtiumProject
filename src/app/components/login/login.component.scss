@@ -1,0 +1,6 @@
+@import "~src/sass/mixins";
+
+h1 {
+  @include header(500%, #fff);
+  margin: 30px ;
+}

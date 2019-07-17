@@ -1,12 +1,24 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="email">Email: </label>
-    <input type="email" formControlName="email" id="email" autocomplete="username email">
-    <label for="password">Password:</label>
-    <input type="password" formControlName="password" class="form-control" id="password" autocomplete="current-password"/>
+  <div class="errors" *ngIf="(submitted && serverError)">
+    <div class="error">{{serverError}}</div>
   </div>
   <div class="form-group">
-    <button type="submit" [disabled]="submitted" class="btn btn-primary">Login</button>
-    <button type="button" [routerLink]="secondButtonUrl" class="btn btn-primary">{{secondButtonName}}</button>
+    <label for="email">Email: </label>
+    <input type="email" formControlName="email" id="email" autocomplete="username email" [class.invalid]="submitted && loginForm.get('email').invalid" >
+    <div class="errors" *ngIf="(submitted && loginForm.get('email').invalid)">
+      <div class="error" *ngIf="loginForm.get('email').hasError('required')">E-mail is required</div>
+      <div class="error" *ngIf="loginForm.get('email').hasError('email')">Invalid E-mail</div>
+    </div>
+    <label for="password">Password:</label>
+    <input type="password" formControlName="password" class="form-control" id="password" autocomplete="current-password"
+           [class.invalid]="submitted && loginForm.get('password').invalid"/>
+    <div class="errors" *ngIf="(submitted && loginForm.get('password').invalid)">
+      <div class="error" *ngIf="loginForm.get('password').hasError('strong')">Password is too weak.</div>
+      <div class="error" *ngIf="loginForm.get('password').hasError('required')">Password is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="loading" class="btn btn-primary">{{register? 'Register' : 'Login'}}</button>
+    <a [routerLink]="register? '/login' : '/register'">{{register? 'Have account already? Login!' : 'Don\'t have account? Register!'}}</a>
   </div>
 </form>

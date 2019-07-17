@@ -14,19 +14,20 @@ export interface LoginForm {
 export class FormComponent implements OnInit {
 
   @Output() loginFormSubmitted = new EventEmitter<LoginForm>();
-  @Input() secondButtonName = 'Registration';
-  @Input() secondButtonUrl = '/register';
+  @Input() register = false;
+  @Input() serverError = false;
 
   loginForm: FormGroup;
   submitted = false;
+  loading = false;
   constructor() { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
       email: new FormControl('', {validators: [Validators.required, Validators.email]}),
-      password: new FormControl('', {validators: [Validators.required, Validators.email,
-          this.strongPasswordValidator]})
+      password: new FormControl('', {validators: [Validators.required]})
     });
+    if (this.register) { this.loginForm.get('password').setValidators([Validators.required, this.strongPasswordValidator]); }
   }
 
   strongPasswordValidator(formControl: FormControl): {strong: true} | null {
@@ -45,9 +46,11 @@ export class FormComponent implements OnInit {
   onSubmit() {
     console.log('submitted');
     console.log(this.form);
-    this.loginForm.disable();
     this.submitted = true;
-    this.loginFormSubmitted.emit(this.form);
-
+    if (this.loginForm.valid) {
+      this.loginForm.disable();
+      this.loginFormSubmitted.emit(this.form);
+      this.loading = true;
+    }
   }
 }

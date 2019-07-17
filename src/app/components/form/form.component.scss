@@ -2,23 +2,38 @@
 
 form {
   width: 60%;
-  margin: auto;
+  margin: 50px auto;
 }
-input, label, button {
+input, label, button, a {
   display: block;
   margin: auto;
 }
 .form-group {
   display: block;
   margin: 15px;
+  padding: 15px;
 }
 button {
-  @include button(100, 20);
-
+  @include button(400px, 50px);
 }
 input {
   @include input;
 }
 label {
   @include label;
+}
+a {
+  width: 400px;
+  text-align: right;
+  outline: none;
+  text-decoration: none;
+  @include customFont();
+  color: black;
+  &:hover {
+    color: white;
+  }
+}
+div.error {
+  @include customFont(true, 120%);
+  color: #a90000;
 }

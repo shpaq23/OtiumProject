@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginForm} from '../form/form.component';
+import {AuthorizationService} from '../../api/services/authorization.service';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor() { }
+  loginForm: LoginForm;
+  constructor(private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
   }
-
+  formSubmitted($event: LoginForm) {
+    this.loginForm = $event;
+    console.log(this.loginForm);
+  }
 }
