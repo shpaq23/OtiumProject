@@ -8,6 +8,7 @@ export interface User {
   token: string;
   expireDate: string;
   email: string;
+  isAdmin: boolean;
 }
 
 @Injectable({
@@ -23,5 +24,8 @@ export class AuthorizationService {
   }
   login(loginForm: LoginForm): Observable<User> {
     return this.http.post<User>(this.url + '/loginToPlatform', loginForm);
+  }
+  logout(): Observable<any> {
+    return this.http.get(this.url + '/logout');
   }
 }

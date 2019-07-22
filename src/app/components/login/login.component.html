@@ -1,2 +1,2 @@
 <h1>Otium Project</h1>
-<app-form (loginFormSubmitted)="formSubmitted($event)"></app-form>
+<app-form [serverError]="serverError$ | async" (loginFormSubmitted)="formSubmitted($event)"></app-form>

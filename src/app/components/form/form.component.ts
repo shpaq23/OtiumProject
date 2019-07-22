@@ -15,7 +15,7 @@ export class FormComponent implements OnInit {
 
   @Output() loginFormSubmitted = new EventEmitter<LoginForm>();
   @Input() register = false;
-  @Input() serverError = false;
+  @Input() serverError: string;
 
   loginForm: FormGroup;
   submitted = false;
