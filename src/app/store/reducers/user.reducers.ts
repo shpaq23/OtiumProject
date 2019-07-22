@@ -12,7 +12,7 @@ export function userReducer(state = initialUserState, action: UserActions): User
     case UserActionsTypes.LoginUserFail:
       return  {
         ... state,
-        error: ''
+        error: action.payload
       };
     case UserActionsTypes.LogoutUserSuccess:
       return {

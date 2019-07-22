@@ -48,9 +48,9 @@ export class FormComponent implements OnInit {
     console.log(this.form);
     this.submitted = true;
     if (this.loginForm.valid) {
-      this.loginForm.disable();
+      // this.loginForm.disable();
       this.loginFormSubmitted.emit(this.form);
-      this.loading = true;
+      // this.loading = true;
     }
   }
 }
