@@ -1,4 +1,4 @@
-@import "~src/sass/mixins";
+@import "../../../sass/mixins";
 
 h1 {
   @include header(500%, #fff);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {LoginForm} from '../../components/form/form.component';
+import {LoginForm} from '../../user/form/form.component';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 

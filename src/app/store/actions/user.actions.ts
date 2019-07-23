@@ -1,6 +1,6 @@
 import {Action} from '@ngrx/store';
 import {User} from '../../api/services/authorization.service';
-import {LoginForm} from '../../components/form/form.component';
+import {LoginForm} from '../../user/form/form.component';
 
 export enum UserActionsTypes {
   LoginUser = '[User] Login User',
