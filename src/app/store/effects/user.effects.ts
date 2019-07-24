@@ -28,7 +28,10 @@ export class UserEffects {
     map((action: LoginUser) => action.payload),
     mergeMap(payload =>
       this.authorizationService.login(payload).pipe(
-        map(user => (new LoginUserSuccess(user))),
+        map(user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          return new LoginUserSuccess(user);
+        }),
         catchError(err => of(new LoginUserFail(err))),
         tap(() => this.spinnerStore.dispatch(new HideSpinner()))
       )));

@@ -6,7 +6,7 @@ export interface UserState {
   success: boolean;
 }
 export const initialUserState: UserState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')),
   error: '',
   success: false
 };
