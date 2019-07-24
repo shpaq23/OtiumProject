@@ -9,7 +9,11 @@ export enum UserActionsTypes {
 
   LogoutUser = '[User] Logout User',
   LogoutUserSuccess = '[User] Logout User Success',
-  LogoutUserFail = '[User] Logout User Fail'
+  LogoutUserFail = '[User] Logout User Fail',
+
+  RegisterUser = '[User] Register User',
+  RegisterUserSuccess = '[User] Register User Success',
+  RegisterUserFail = '[User] Register User Fail'
 }
 export class LoginUser implements Action {
   public readonly type = UserActionsTypes.LoginUser;
@@ -33,5 +37,18 @@ export class LogoutUserFail implements Action {
   public readonly type = UserActionsTypes.LogoutUserFail;
   constructor(public payload: string) {}
 }
+export class RegisterUser implements Action {
+  public readonly type = UserActionsTypes.RegisterUser;
+  constructor(public payload: LoginForm) {}
+}
+export class RegisterUserSuccess implements Action {
+  public readonly type = UserActionsTypes.RegisterUserSuccess;
+}
+export class RegisterUserFail implements Action {
+  public readonly type = UserActionsTypes.RegisterUserFail;
+  constructor(public payload: string) {}
+}
+
 export type UserActions = LoginUser | LoginUserSuccess | LoginUserFail
-  | LogoutUser | LogoutUserSuccess | LogoutUserFail;
+  | LogoutUser | LogoutUserSuccess | LogoutUserFail | RegisterUser | RegisterUserSuccess
+  | RegisterUserFail;

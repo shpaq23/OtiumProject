@@ -11,3 +11,7 @@ export const getError = createSelector(
   getUserFeatureState,
   state => state.error
 );
+export const getSuccess = createSelector(
+  getUserFeatureState,
+  state => state.success
+);

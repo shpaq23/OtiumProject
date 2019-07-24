@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginForm} from '../form/form.component';
-import {AuthorizationService} from '../../api/services/authorization.service';
+import {UserState} from '../../store/state/user.state';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {getError, getSuccess} from '../../store/selectors/user.selectors';
+import {RegisterUser} from '../../store/actions/user.actions';
+import {SpinnerState} from '../../store/state/spinner.state';
+import {isSpinnerShowing} from '../../store/selectors/spinner.selectors';
 
 @Component({
   selector: 'app-register',
@@ -8,13 +14,21 @@ import {AuthorizationService} from '../../api/services/authorization.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  loginForm: LoginForm;
-  constructor(private authorizationService: AuthorizationService) { }
+
+  serverError$: Observable<string>;
+  loading$: Observable<boolean>;
+  success$: Observable<boolean>;
+  constructor(private store: Store<UserState>,
+              private spinnerStore: Store<SpinnerState>) { }
 
   ngOnInit() {
+    this.serverError$ = this.store.pipe(select(getError));
+    this.loading$ = this.spinnerStore.pipe(select(isSpinnerShowing));
+    this.success$ = this.store.pipe(select(getSuccess));
   }
   formSubmitted($event: LoginForm) {
-    this.loginForm = $event;
-    console.log(this.loginForm);
+    console.log($event);
+    this.store.dispatch(new RegisterUser($event));
   }
+
 }

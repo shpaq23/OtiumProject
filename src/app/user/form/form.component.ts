@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export interface LoginForm {
@@ -11,15 +11,15 @@ export interface LoginForm {
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnChanges {
 
   @Output() loginFormSubmitted = new EventEmitter<LoginForm>();
   @Input() register = false;
   @Input() serverError: string;
+  @Input() loading = false;
 
   loginForm: FormGroup;
   submitted = false;
-  loading = false;
   constructor() { }
 
   ngOnInit() {
@@ -48,9 +48,15 @@ export class FormComponent implements OnInit {
     console.log(this.form);
     this.submitted = true;
     if (this.loginForm.valid) {
-      // this.loginForm.disable();
       this.loginFormSubmitted.emit(this.form);
-      // this.loading = true;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.loading) {
+      this.loginForm.disable();
+    } else if (this.loginForm) {
+      this.loginForm.enable();
     }
   }
 }

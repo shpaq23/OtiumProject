@@ -1,2 +1,5 @@
 <h1>Otium Project</h1>
-<app-form (loginFormSubmitted)="formSubmitted($event)" [register]="true"></app-form>
+<div *ngIf="success$ | async" class="success"> Sukcesywne zarejestrowanie </div>
+<app-form [serverError]="serverError$ | async"
+          [loading]="loading$ | async"
+          (loginFormSubmitted)="formSubmitted($event)" [register]="true"></app-form>

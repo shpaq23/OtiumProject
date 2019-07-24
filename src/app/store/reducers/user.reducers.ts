@@ -25,6 +25,16 @@ export function userReducer(state = initialUserState, action: UserActions): User
         ... state,
         error: action.payload
       };
+    case UserActionsTypes.RegisterUserSuccess:
+      return {
+        ... state,
+        success: true
+      };
+    case UserActionsTypes.RegisterUserFail:
+      return {
+        ... state,
+        error: action.payload
+      };
     default:
       return state;
   }

@@ -3,7 +3,15 @@ import {AuthorizationService} from '../../api/services/authorization.service';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Observable, of} from 'rxjs';
 import {Action, Store} from '@ngrx/store';
-import {LoginUser, LoginUserFail, LoginUserSuccess, LogoutUserFail, LogoutUserSuccess, UserActionsTypes} from '../actions/user.actions';
+import {
+  LoginUser,
+  LoginUserFail,
+  LoginUserSuccess,
+  LogoutUserFail,
+  LogoutUserSuccess,
+  RegisterUser, RegisterUserFail, RegisterUserSuccess,
+  UserActionsTypes
+} from '../actions/user.actions';
 import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 import {HideSpinner, ShowSpinner} from '../actions/spinner.actions';
 import {SpinnerState} from '../state/spinner.state';
@@ -33,4 +41,15 @@ export class UserEffects {
       catchError(err => of(new LogoutUserFail(err))),
       tap(() => this.spinnerStore.dispatch(new HideSpinner()))
     )));
+  @Effect()
+  registerUser: Observable<Action> = this.actions$.pipe(
+    ofType(UserActionsTypes.RegisterUser),
+    tap(() => this.spinnerStore.dispatch(new ShowSpinner())),
+    map((action: RegisterUser) => action.payload),
+    mergeMap(payload =>
+      this.authorizationService.register(payload).pipe(
+        map(() => (new RegisterUserSuccess())),
+        catchError(err => of(new RegisterUserFail(err))),
+        tap(() => this.spinnerStore.dispatch(new HideSpinner()))
+      )));
 }
